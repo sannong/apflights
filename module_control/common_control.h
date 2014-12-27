@@ -13,7 +13,7 @@
 #define COMMON_CONTROL_H_
 
 /* XBEE communication BAUD rate*/
-#define XBEE_SERIAL_RATE 38400
+#define XBEE_SERIAL_RATE 9600
 
 /* General Defines */
 #define ONE_SEC_MS              1000u
@@ -26,6 +26,7 @@
 #define TIMER_ON                0x1
 #define TIMER_OFF               0x0
 #define INVALID_INDEX           0xFF
+#define RETRY_COUNT				3u
 
 /* Module defines */
 #define HOST_MODULE             3u

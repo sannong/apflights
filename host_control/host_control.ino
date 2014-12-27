@@ -3,7 +3,7 @@
  *  
  * \brief Source file for host control. 
  *  
- *	This file containes the main startup code and host control functions for    
+ *	This file contains the main startup code and host control functions for    
  *	the referee light system.
  *	
  * \author Benjamin Sanda 
@@ -46,7 +46,7 @@ XBeeResponse response = XBeeResponse();
 Rx16Response rx16 = Rx16Response();
 RECV_MSG_T rx_msg;
 
-/* forward declerations */
+/* forward decelerations */
 static void configurePins(void);
 static void configureInterrupts(void);
 static int sendMessage(uint8_t msg, unsigned int size, unsigned int destination);
@@ -66,12 +66,13 @@ void setup(void)
     /* configure the GPIO */
     configurePins();
 
-    /* configure the interupts */
+    /* configure the interrupts */
     configureInterrupts();
 
     /* initialize the xbee connection: interrupts must
        be on for xbee to work */
-    xbee.begin(XBEE_SERIAL_RATE);
+    Serial.begin(XBEE_SERIAL_RATE);
+    xbee.setSerial(Serial);
 
     /* activate the board LED to indicate setup is complete */
     digitalWrite(BOARD_LED, HIGH);
@@ -79,11 +80,28 @@ void setup(void)
     /* activate the reset button LED to indicate system is ready */
     digitalWrite(BLUE_LED, HIGH);
 
-    /* set initial LED states to all RED to indicate startup */
+    digitalWrite(WHITE_LED_L, HIGH);
+    digitalWrite(WHITE_LED_R, HIGH);
+    digitalWrite(WHITE_LED_C, HIGH);
+    
+    delay(500);
+
+  /*  digitalWrite(WHITE_LED_L, LOW);
+    digitalWrite(WHITE_LED_R, LOW);
+    digitalWrite(WHITE_LED_C, LOW); */
+
+    delay(500);
+
     digitalWrite(RED_LED_L, HIGH);
     digitalWrite(RED_LED_R, HIGH);
     digitalWrite(RED_LED_C, HIGH);
-    
+
+    delay(500);
+
+   /* digitalWrite(RED_LED_L, LOW);
+    digitalWrite(RED_LED_R, LOW);
+    digitalWrite(RED_LED_C, LOW); */
+
     delay(500);
 
     /* Establish the link with each module. Each module will send a "ready"
@@ -191,7 +209,9 @@ void loop(void)
         {
             /* clear LEDs and send clear to modules */
             sendAllClear();
-            delay(300);
+            delay(500);
+            sendAllClear();
+            delay(500);
             sendAllClear();
             
             if(control_state != RESET)
@@ -355,44 +375,52 @@ static int sendMessage(uint8_t msg, unsigned int size, unsigned int destination)
     uint8_t buf = 0;
     TxStatusResponse txStatus = TxStatusResponse();
     Tx16Request tx;
+    unsigned int count = 0;
 
     /* ste the message buffer */
     buf = msg;
 
-    /* set the TX request */
-    tx = Tx16Request(destination, &buf, size);
-    
-    /* send the message */    
-    xbee.send(tx); 
-    
-    if (destination != BROADCAST_ADDRESS)
+    do
     {
-        /* wait for the ack */
-        if (xbee.readPacket(250u))
-        {
-            /* check that it is the ack: TX_STATUS_RESPONSE */
-            if (xbee.getResponse().getApiId() == TX_STATUS_RESPONSE)
-            {
-                /* get the responce */
-                xbee.getResponse().getZBTxStatusResponse(txStatus);
 
-                /* get the delivery status, the fifth byte */
-                if (txStatus.getStatus() == SUCCESS)
+        /* set the TX request */
+        tx = Tx16Request(destination, &buf, size);
+        
+        /* send the message */    
+        xbee.send(tx); 
+        
+        if (destination != BROADCAST_ADDRESS)
+        {
+            /* wait for the ack */
+            if (xbee.readPacket(250u))
+            {
+                /* check that it is the ack: TX_STATUS_RESPONSE */
+                if (xbee.getResponse().getApiId() == TX_STATUS_RESPONSE)
                 {
-                    ret = OK;
+                    /* get the response */
+                    xbee.getResponse().getZBTxStatusResponse(txStatus);
+
+                    /* get the delivery status, the fifth byte */
+                    if (txStatus.getStatus() == SUCCESS)
+                    {
+                        ret = OK;
+                    }
                 }
             }
+            else if (xbee.getResponse().isError())
+            {
+                ret = xbee.getResponse().getErrorCode();
+            }
         }
-        else if (xbee.getResponse().isError())
+        else
         {
-            ret = xbee.getResponse().getErrorCode();
+            /* brodcast tx, no ACK returned */
+            ret = OK;
         }
-    }
-    else
-    {
-        /* brodcast tx, no ACK returned */
-        ret = OK;
-    }
+
+        count++;
+
+    }while((ret != OK) && (count < RETRY_COUNT));
 
     return(ret);
 }
@@ -452,7 +480,7 @@ static int recvMessage(int delay)
     }
     else
     {
-        /* no responce */
+        /* no response */
         ret = NO_RX;
     }
 
@@ -460,10 +488,10 @@ static int recvMessage(int delay)
 }
 
 /**
- * Checks incomming message 
+ * Checks incoming message 
  *  
- * This function checks the incomming message. If a clear is recived then the 
- * module is placed in normal mode, if a reset is recieved then the module is 
+ * This function checks the incoming message. If a clear is received then the 
+ * module is placed in normal mode, if a reset is received then the module is 
  * reset. 
  * 
  */
@@ -520,7 +548,7 @@ static void watchdog_func(void)
 /**
  * \brief Sends the clear message to all modules and resets the LEDs 
  *  
- * This fuction sends the clear message to each module to place them back into 
+ * This function sends the clear message to each module to place them back into 
  * the normal state. It also resets the LEDs to all off. 
  * 
  */
@@ -660,7 +688,7 @@ static void controledReset(void)
         /* send clear */
         sendAllClear();
 
-        /* delay to allow clear to propigate */
+        /* delay to allow clear to propagate */
         delay(1000);
 
         /* send reset to all modules */

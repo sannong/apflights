@@ -16,6 +16,7 @@
 #define BUTTON_PRESS_TIMEOUT    (10*ONE_SEC_MS)
 #define LED_ON_DELAY            (8*ONE_SEC_MS)
 
+
 /* Pin defines */
 #define BLUE_BUTTON             2u
 #define BLUE_LED                4u

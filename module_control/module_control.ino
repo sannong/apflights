@@ -3,7 +3,7 @@
  *  
  * \brief Source file for general module control. 
  *  
- *	This file containes the main startup code and module control functions for    
+ *	This file contains the main startup code and module control functions for    
  *	the referee light system.
  *	
  * \author Benjamin Sanda 
@@ -24,7 +24,7 @@ XBeeResponse response = XBeeResponse();
 Rx16Response rx16 = Rx16Response();
 RECV_MSG_T rx_msg; 
 
-/* forward declerations */
+/* forward decelerations */
 static void flashLed(int pin, int times, int wait);
 static void configurePins(void);
 static void configureInterrupts(void);
@@ -46,19 +46,20 @@ void setup(void)
     /* configure the GPIO */
     configurePins();
     
-    /* configure the interupts */
+    /* configure the interrupts */
     configureInterrupts();
 
     /* initialize the xbee connection: interrupts must
        be on for xbee to work */
-    xbee.begin(XBEE_SERIAL_RATE);
+    Serial.begin(XBEE_SERIAL_RATE);
+    xbee.setSerial(Serial);
 
-    /* activate the baord LED to indicate setup is complete */
+    /* activate the board LED to indicate setup is complete */
     digitalWrite(BOARD_LED, HIGH);
 
     while (control_state == STARTUP)
     {
-        /* inform the host we are ready, continue to retry untill the host 
+        /* inform the host we are ready, continue to retry until the host 
         responds*/
         flashLed(INDICATOR_LED, 1, 200); 
         delay(2000u);
@@ -70,7 +71,7 @@ void setup(void)
 
             if (ret == OK)
             {
-                /* check to see if clear was recieved and if so place into startup ack mode*/ 
+                /* check to see if clear was received and if so place into startup ack mode*/ 
                 checkMessage(); 
             }
         }
@@ -190,7 +191,7 @@ void loop(void)
 
 
 /** 
- * \brief Configures the GPIO dirrections and modes. 
+ * \brief Configures the GPIO directions and modes. 
  *  
  * This function configure the boards GPIO as needed. The following pins are     
  * configured: 
@@ -199,7 +200,7 @@ void loop(void)
  *  - Pin 4: White button LED, configured as output.
  *  - Pin 5: Red button LED, configured as output.
  *  - Pin 6: Blue indicator LED, configured as output.
- *  - Pin 13: Onboard staus LED, configured as output.
+ *  - Pin 13: Onboard status LED, configured as output.
  *  
  *  Once configured the output pin are set low (off).
  *
@@ -240,7 +241,7 @@ static void configureInterrupts(void)
 {
     noInterrupts();
 
-    /* attach the ISR rountines */
+    /* attach the ISR routines */
     /* White Button: int.0 = pin 2 */
     attachInterrupt(0, buttonPressWhite, FALLING);
     /* Red Button: int.1 = pin 3 */
@@ -340,36 +341,44 @@ static int sendMessage(uint8_t msg, unsigned int size, unsigned int destination)
     uint8_t buf = 0;
     TxStatusResponse txStatus = TxStatusResponse();
     Tx16Request tx;
+    unsigned int count = 0;
 
     /* ste the message buffer */
     buf = msg;
 
-    /* set the TX request */
-    tx = Tx16Request(destination, &buf, size);
-
-    /* send the message */
-    xbee.send(tx);
-
-    /* wait for the ack */
-    if (xbee.readPacket(250u))
+    do
     {
-        /* check that it is the ack: TX_STATUS_RESPONSE */
-        if (xbee.getResponse().getApiId() == TX_STATUS_RESPONSE)
-        {
-            /* get the responce */
-            xbee.getResponse().getZBTxStatusResponse(txStatus);
 
-            /* get the delivery status, the fifth byte */
-            if (txStatus.getStatus() == SUCCESS)
+        /* set the TX request */
+        tx = Tx16Request(destination, &buf, size);
+
+        /* send the message */
+        xbee.send(tx);
+
+        /* wait for the ack */
+        if (xbee.readPacket(250u))
+        {
+            /* check that it is the ack: TX_STATUS_RESPONSE */
+            if (xbee.getResponse().getApiId() == TX_STATUS_RESPONSE)
             {
-                ret = OK;
+                /* get the response */
+                xbee.getResponse().getZBTxStatusResponse(txStatus);
+
+                /* get the delivery status, the fifth byte */
+                if (txStatus.getStatus() == SUCCESS)
+                {
+                    ret = OK;
+                }
             }
         }
-    }
-    else if (xbee.getResponse().isError())
-    {
-        ret = xbee.getResponse().getErrorCode();
-    }
+        else if (xbee.getResponse().isError())
+        {
+            ret = xbee.getResponse().getErrorCode();
+        }
+
+        count++;
+
+    }while((ret != OK) && (count < RETRY_COUNT));
 
     return (ret);
 }
@@ -412,7 +421,7 @@ static int recvMessage(int delay)
     }
     else
     {
-        /* no responce */
+        /* no response */
         ret = NO_RX;
     }
 
@@ -420,10 +429,10 @@ static int recvMessage(int delay)
 }
 
 /**
- * Checks incomming message 
+ * Checks incoming message 
  *  
- * This function checks the incomming message. If a clear is recived then the 
- * module is placed in normal mode, if a reset is recieved then the module is 
+ * This function checks the incoming message. If a clear is revived then the 
+ * module is placed in normal mode, if a reset is received then the module is 
  * reset. 
  * 
  */
@@ -434,7 +443,7 @@ static void checkMessage()
         /* check the message */       
         if (rx_msg.buf[0] == module_clear)
         {
-            /* clear recieved, go back to normal mode */
+            /* clear received, go back to normal mode */
             /* stop the timer */
             FlexiTimer2::stop(); 
             ledStateNormal(); 
