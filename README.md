@@ -39,12 +39,17 @@ Xbee Programming Notes
 
 The Xbee modules are programmed using the XCTU utility available from Digi and the SparkFun XBee Explorer USB board. The Xbee module is placed in the Explorer board and programed via USB from a PC. The Xbee modules must be programed with the Xbee address and BAUD rate defined in the common_control.h header files. The default values are:
 
-#define XBEE_SERIAL_RATE        9600
-#define HOST_ADDRESS            0x1
-#define LEFT_ADDRESS            0x2
-#define RIGHT_ADDRESS           0x3
-#define CENTER_ADDRESS          0x4
-#define BRODCAST_ADDRESS        0xFFFF
+define XBEE_SERIAL_RATE        9600
+
+define HOST_ADDRESS            0x1
+
+define LEFT_ADDRESS            0x2
+
+define RIGHT_ADDRESS           0x3
+
+define CENTER_ADDRESS          0x4
+
+define BRODCAST_ADDRESS        0xFFFF
 
 If the address and BAUD defined in the header is not used communication will fail. Also, although possible, I do not recommend increasing the Xbee BAUD rate above 9600. Higher rates tax the Arduino and can lead to unreliable communication between the host and modules. An example programming file is provided in the repository.
 
