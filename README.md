@@ -61,3 +61,12 @@ Construction Notes
 For the LED indicator lights an eight conductor cable (bought at Lowes) was used providing 6 ground connections, and two power (12 V). The lights are backward wired with the ground switched through each FET. This was done because the FET's on the power shield are split into a 12 V and 5 V group (3 each). We need 12 V for all LEDs, thus the 12 V input of two of the FETs is used for all the LEDS, and the grounds are fed to the source of each FET.
 
 The current design does not have a convenient way to charge/connect/disconnect the module batteries without manually opening the case. This is a current drawback of the design but was done to prevent tampering during operation. Future designs may improve on this.
+
+How you actually mount and display the LED lights is entirely up to you. For our system I carved and finished a big block of walnut and used that as the backboard to mount the lights onto (see pictures in the img folder). I then mounted a speaker stand adapter to the bottom which just sits on a standard AV speaker stand. For the base station I used a large plastic outdoor conduit box and drilled holes in the sides as needed.
+
+The choice of lights is also customizable. They just have to be 12 V or 5 V LEDs. You can use the bar type I used, or any that fit your aesthetic and budget. One other option we almost went with were automotive truck LED indicators.
+
+Questions/Comments
+===============
+
+Fell free to email the author Ben Sanda with any questions or comments: bensanda@michiganapf.com
