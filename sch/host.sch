@@ -4011,7 +4011,7 @@ type 0309, grid 2.5 mm</description>
 <text x="43.18" y="109.22" size="1.778" layer="97">Center, Right, Left</text>
 <text x="43.18" y="111.76" size="1.778" layer="97">3 White and 3 Red</text>
 <text x="160.02" y="78.74" size="1.778" layer="97">Reset Button</text>
-<text x="43.18" y="106.68" size="1.778" layer="97">Common Ground</text>
+<text x="43.18" y="106.68" size="1.778" layer="97">Common 12 V</text>
 <text x="109.22" y="12.7" size="1.778" layer="97">VIN From Power Shield</text>
 </plain>
 <instances>
@@ -4026,29 +4026,29 @@ type 0309, grid 2.5 mm</description>
 <attribute name="VALUE" x="155.575" y="80.01" size="1.778" layer="96"/>
 </instance>
 <instance part="JP1" gate="G$1" x="96.52" y="88.9" rot="R270"/>
-<instance part="LFD-NW57SMD" gate="LED" x="73.66" y="121.92" smashed="yes" rot="R180">
-<attribute name="NAME" x="76.2" y="129.54" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="69.85" y="127" size="1.778" layer="96" rot="R270"/>
+<instance part="LFD-NW57SMD" gate="LED" x="73.66" y="114.3" smashed="yes">
+<attribute name="NAME" x="71.12" y="106.68" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="77.47" y="109.22" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LFD-NW57SMD1" gate="LED" x="83.82" y="121.92" smashed="yes" rot="R180">
-<attribute name="NAME" x="86.36" y="129.54" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="80.01" y="127" size="1.778" layer="96" rot="R270"/>
+<instance part="LFD-NW57SMD1" gate="LED" x="83.82" y="114.3" smashed="yes">
+<attribute name="NAME" x="81.28" y="106.68" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="87.63" y="109.22" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LFD-NW57SMD2" gate="LED" x="93.98" y="121.92" smashed="yes" rot="R180">
-<attribute name="NAME" x="96.52" y="129.54" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="90.17" y="127" size="1.778" layer="96" rot="R270"/>
+<instance part="LFD-NW57SMD2" gate="LED" x="93.98" y="114.3" smashed="yes">
+<attribute name="NAME" x="91.44" y="106.68" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="97.79" y="109.22" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LFD-R57SMD" gate="LED" x="104.14" y="121.92" smashed="yes" rot="R180">
-<attribute name="NAME" x="106.68" y="129.54" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="100.33" y="127" size="1.778" layer="96" rot="R270"/>
+<instance part="LFD-R57SMD" gate="LED" x="104.14" y="114.3" smashed="yes">
+<attribute name="NAME" x="101.6" y="106.68" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="107.95" y="109.22" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LFD-R57SMD1" gate="LED" x="114.3" y="121.92" smashed="yes" rot="R180">
-<attribute name="NAME" x="116.84" y="129.54" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="110.49" y="127" size="1.778" layer="96" rot="R270"/>
+<instance part="LFD-R57SMD1" gate="LED" x="114.3" y="114.3" smashed="yes">
+<attribute name="NAME" x="111.76" y="106.68" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="118.11" y="109.22" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LFD-R57SMD2" gate="LED" x="124.46" y="121.92" smashed="yes" rot="R180">
-<attribute name="NAME" x="127" y="129.54" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="120.65" y="127" size="1.778" layer="96" rot="R270"/>
+<instance part="LFD-R57SMD2" gate="LED" x="124.46" y="114.3" smashed="yes">
+<attribute name="NAME" x="121.92" y="106.68" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="128.27" y="109.22" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="R1" gate="G$1" x="132.08" y="71.12"/>
 </instances>
@@ -4083,19 +4083,6 @@ type 0309, grid 2.5 mm</description>
 <wire x1="160.02" y1="76.2" x2="160.02" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$3" class="0">
-<segment>
-<pinref part="PCB1" gate="G$1" pin="~3"/>
-<wire x1="121.92" y1="60.96" x2="121.92" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="D3+"/>
-<wire x1="121.92" y1="81.28" x2="106.68" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="106.68" y1="81.28" x2="106.68" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="106.68" y1="91.44" x2="106.68" y2="99.06" width="0.1524" layer="91"/>
-<pinref part="LFD-R57SMD2" gate="LED" pin="A"/>
-<wire x1="106.68" y1="99.06" x2="124.46" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="124.46" y1="99.06" x2="124.46" y2="119.38" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$4" class="0">
 <segment>
 <pinref part="PCB1" gate="G$1" pin="~5"/>
@@ -4103,10 +4090,34 @@ type 0309, grid 2.5 mm</description>
 <pinref part="JP1" gate="G$1" pin="D5+"/>
 <wire x1="116.84" y1="78.74" x2="101.6" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="78.74" x2="101.6" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="101.6" y1="91.44" x2="101.6" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="91.44" x2="101.6" y2="99.06" width="0.1524" layer="91"/>
+<pinref part="PCB1" gate="G$1" pin="~3"/>
+<wire x1="121.92" y1="60.96" x2="121.92" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="JP1" gate="G$1" pin="D3+"/>
+<wire x1="121.92" y1="81.28" x2="106.68" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="81.28" x2="106.68" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="91.44" x2="106.68" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="99.06" x2="132.08" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="132.08" x2="83.82" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="83.82" y1="132.08" x2="93.98" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="93.98" y1="132.08" x2="104.14" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="132.08" x2="114.3" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="114.3" y1="132.08" x2="124.46" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="124.46" y1="132.08" x2="132.08" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="99.06" x2="132.08" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="99.06" x2="106.68" y2="99.06" width="0.1524" layer="91"/>
+<pinref part="LFD-R57SMD2" gate="LED" pin="A"/>
+<wire x1="124.46" y1="116.84" x2="124.46" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="LFD-R57SMD1" gate="LED" pin="A"/>
-<wire x1="101.6" y1="101.6" x2="114.3" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="101.6" x2="114.3" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="114.3" y1="116.84" x2="114.3" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="LFD-R57SMD" gate="LED" pin="A"/>
+<wire x1="104.14" y1="116.84" x2="104.14" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="LFD-NW57SMD2" gate="LED" pin="A"/>
+<wire x1="93.98" y1="116.84" x2="93.98" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="LFD-NW57SMD1" gate="LED" pin="A"/>
+<wire x1="83.82" y1="116.84" x2="83.82" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="LFD-NW57SMD" gate="LED" pin="A"/>
+<wire x1="73.66" y1="116.84" x2="73.66" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -4116,10 +4127,6 @@ type 0309, grid 2.5 mm</description>
 <pinref part="JP1" gate="G$1" pin="D6+"/>
 <wire x1="114.3" y1="76.2" x2="96.52" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="76.2" x2="96.52" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="91.44" x2="96.52" y2="104.14" width="0.1524" layer="91"/>
-<pinref part="LFD-R57SMD" gate="LED" pin="A"/>
-<wire x1="96.52" y1="104.14" x2="104.14" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="104.14" x2="104.14" y2="119.38" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -4129,10 +4136,6 @@ type 0309, grid 2.5 mm</description>
 <pinref part="JP1" gate="G$1" pin="D9+"/>
 <wire x1="101.6" y1="73.66" x2="91.44" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="91.44" y1="73.66" x2="91.44" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="91.44" x2="91.44" y2="104.14" width="0.1524" layer="91"/>
-<pinref part="LFD-NW57SMD2" gate="LED" pin="A"/>
-<wire x1="91.44" y1="104.14" x2="93.98" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="104.14" x2="93.98" y2="119.38" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -4142,10 +4145,6 @@ type 0309, grid 2.5 mm</description>
 <pinref part="JP1" gate="G$1" pin="D10+"/>
 <wire x1="99.06" y1="71.12" x2="86.36" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="71.12" x2="86.36" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="91.44" x2="86.36" y2="104.14" width="0.1524" layer="91"/>
-<pinref part="LFD-NW57SMD1" gate="LED" pin="A"/>
-<wire x1="86.36" y1="104.14" x2="83.82" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="83.82" y1="104.14" x2="83.82" y2="119.38" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -4155,54 +4154,6 @@ type 0309, grid 2.5 mm</description>
 <pinref part="JP1" gate="G$1" pin="D11+"/>
 <wire x1="96.52" y1="68.58" x2="81.28" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="81.28" y1="68.58" x2="81.28" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="91.44" x2="81.28" y2="104.14" width="0.1524" layer="91"/>
-<pinref part="LFD-NW57SMD" gate="LED" pin="A"/>
-<wire x1="81.28" y1="104.14" x2="73.66" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="104.14" x2="73.66" y2="119.38" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$10" class="0">
-<segment>
-<pinref part="LFD-NW57SMD2" gate="LED" pin="K"/>
-<wire x1="93.98" y1="127" x2="93.98" y2="132.08" width="0.1524" layer="91"/>
-<pinref part="LFD-NW57SMD1" gate="LED" pin="K"/>
-<wire x1="93.98" y1="132.08" x2="83.82" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="83.82" y1="127" x2="83.82" y2="132.08" width="0.1524" layer="91"/>
-<pinref part="LFD-NW57SMD" gate="LED" pin="K"/>
-<wire x1="83.82" y1="132.08" x2="73.66" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="127" x2="73.66" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="132.08" x2="68.58" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="132.08" x2="68.58" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="96.52" x2="83.82" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="D11-"/>
-<wire x1="83.82" y1="96.52" x2="83.82" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="D10-"/>
-<wire x1="83.82" y1="96.52" x2="88.9" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="88.9" y1="91.44" x2="88.9" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="D9-"/>
-<wire x1="88.9" y1="96.52" x2="93.98" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="91.44" x2="93.98" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="D6-"/>
-<wire x1="93.98" y1="96.52" x2="99.06" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="99.06" y1="91.44" x2="99.06" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="D5-"/>
-<wire x1="99.06" y1="96.52" x2="104.14" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="91.44" x2="104.14" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="LFD-R57SMD" gate="LED" pin="K"/>
-<wire x1="104.14" y1="127" x2="104.14" y2="132.08" width="0.1524" layer="91"/>
-<pinref part="LFD-R57SMD1" gate="LED" pin="K"/>
-<wire x1="104.14" y1="132.08" x2="114.3" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="127" x2="114.3" y2="132.08" width="0.1524" layer="91"/>
-<pinref part="LFD-R57SMD2" gate="LED" pin="K"/>
-<wire x1="114.3" y1="132.08" x2="124.46" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="124.46" y1="127" x2="124.46" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="124.46" y1="132.08" x2="132.08" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="132.08" y1="132.08" x2="132.08" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="D3-"/>
-<wire x1="132.08" y1="96.52" x2="109.22" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="96.52" x2="109.22" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="109.22" y1="96.52" x2="109.22" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="132.08" x2="104.14" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -4210,6 +4161,58 @@ type 0309, grid 2.5 mm</description>
 <pinref part="R1" gate="G$1" pin="2"/>
 <pinref part="679-3136-ND" gate="LED" pin="A"/>
 <wire x1="137.16" y1="71.12" x2="147.32" y2="71.12" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$15" class="0">
+<segment>
+<pinref part="JP1" gate="G$1" pin="D3-"/>
+<wire x1="109.22" y1="96.52" x2="109.22" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="109.22" y1="96.52" x2="124.46" y2="96.52" width="0.1524" layer="91"/>
+<pinref part="LFD-R57SMD2" gate="LED" pin="K"/>
+<wire x1="124.46" y1="96.52" x2="124.46" y2="109.22" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$16" class="0">
+<segment>
+<pinref part="JP1" gate="G$1" pin="D11-"/>
+<wire x1="83.82" y1="91.44" x2="83.82" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="83.82" y1="101.6" x2="73.66" y2="101.6" width="0.1524" layer="91"/>
+<pinref part="LFD-NW57SMD" gate="LED" pin="K"/>
+<wire x1="73.66" y1="101.6" x2="73.66" y2="109.22" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$18" class="0">
+<segment>
+<pinref part="JP1" gate="G$1" pin="D10-"/>
+<wire x1="83.82" y1="104.14" x2="88.9" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="104.14" x2="88.9" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="LFD-NW57SMD1" gate="LED" pin="K"/>
+<wire x1="83.82" y1="104.14" x2="83.82" y2="109.22" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$20" class="0">
+<segment>
+<pinref part="JP1" gate="G$1" pin="D6-"/>
+<wire x1="104.14" y1="104.14" x2="99.06" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="99.06" y1="104.14" x2="99.06" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="LFD-R57SMD" gate="LED" pin="K"/>
+<wire x1="104.14" y1="104.14" x2="104.14" y2="109.22" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$21" class="0">
+<segment>
+<pinref part="JP1" gate="G$1" pin="D5-"/>
+<wire x1="114.3" y1="101.6" x2="104.14" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="101.6" x2="104.14" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="LFD-R57SMD1" gate="LED" pin="K"/>
+<wire x1="114.3" y1="101.6" x2="114.3" y2="109.22" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="JP1" gate="G$1" pin="D9-"/>
+<pinref part="LFD-NW57SMD2" gate="LED" pin="K"/>
+<wire x1="93.98" y1="91.44" x2="93.98" y2="109.22" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
