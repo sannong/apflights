@@ -32,7 +32,9 @@ The base station also monitors the watchdog timer on vote entry. All three votes
 Adruino Programming Notes
 ===============
 
-The module Arduino's are programmed with the module source code, and the host is programmed with the host code. All modules are programmed with the same image (determination of left, right, center is made automatically using the Xbee address).
+The module Arduino's are programmed with the module source code, and the host is programmed with the host code. All modules are programmed with the same image (determination of left, right, center is made automatically using the Xbee address). 
+
+Note: The Arduino source files end in .ino not .c. They are C files, but the Arduino IDE likes them named .ino. They are just normal C files though and can be edited as such.
 
 Xbee Programming Notes
 ===============
