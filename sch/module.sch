@@ -5705,9 +5705,9 @@ type 0309, grid 2.5 mm</description>
 <plain>
 <text x="162.56" y="93.98" size="1.778" layer="97">White Button.</text>
 <text x="162.56" y="119.38" size="1.778" layer="97">Red Button</text>
-<text x="137.16" y="5.08" size="1.778" layer="97">Magnetic Reed Switch</text>
-<text x="137.16" y="2.54" size="1.778" layer="97">Power Control</text>
-<text x="137.16" y="-10.16" size="1.778" layer="97">LI ION Battery Pack</text>
+<text x="134.62" y="-7.62" size="1.778" layer="97">Magnetic Reed Switch</text>
+<text x="134.62" y="-10.16" size="1.778" layer="97">Power Control</text>
+<text x="134.62" y="5.08" size="1.778" layer="97">LI ION Battery Pack</text>
 <text x="162.56" y="73.66" size="1.778" layer="97">Status Indicator LED</text>
 </plain>
 <instances>
@@ -5730,11 +5730,11 @@ type 0309, grid 2.5 mm</description>
 <attribute name="VALUE" x="155.575" y="95.25" size="1.778" layer="96"/>
 </instance>
 <instance part="82T9863" gate="G$1" x="149.86" y="73.66" rot="R90"/>
-<instance part="1281" gate="G$1" x="109.22" y="-10.16" smashed="yes" rot="R270">
-<attribute name="NAME" x="114.3" y="-8.89" size="1.778" layer="95"/>
-<attribute name="VALUE" x="115.57" y="-11.43" size="1.778" layer="96"/>
+<instance part="1281" gate="G$1" x="109.22" y="5.08" smashed="yes" rot="R270">
+<attribute name="NAME" x="114.3" y="6.35" size="1.778" layer="95"/>
+<attribute name="VALUE" x="115.57" y="3.81" size="1.778" layer="96"/>
 </instance>
-<instance part="59140-040-ND" gate="G$1" x="109.22" y="2.54"/>
+<instance part="59140-040-ND" gate="G$1" x="109.22" y="-10.16"/>
 <instance part="GND2" gate="1" x="109.22" y="-20.32"/>
 <instance part="R1" gate="G$1" x="132.08" y="111.76"/>
 <instance part="R2" gate="G$1" x="132.08" y="86.36"/>
@@ -5803,23 +5803,9 @@ type 0309, grid 2.5 mm</description>
 <wire x1="160.02" y1="116.84" x2="160.02" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="1281" gate="G$1" pin="-"/>
+<pinref part="59140-040-ND" gate="G$1" pin="2"/>
 <pinref part="GND2" gate="1" pin="GND"/>
 <wire x1="109.22" y1="-15.24" x2="109.22" y2="-17.78" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$6" class="0">
-<segment>
-<pinref part="PCB1" gate="G$1" pin="VIN"/>
-<pinref part="59140-040-ND" gate="G$1" pin="1"/>
-<wire x1="109.22" y1="17.78" x2="109.22" y2="10.16" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$7" class="0">
-<segment>
-<pinref part="59140-040-ND" gate="G$1" pin="2"/>
-<pinref part="1281" gate="G$1" pin="+"/>
-<wire x1="109.22" y1="-2.54" x2="109.22" y2="-5.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -5841,6 +5827,20 @@ type 0309, grid 2.5 mm</description>
 <pinref part="R3" gate="G$1" pin="2"/>
 <pinref part="82T9863" gate="G$1" pin="A"/>
 <wire x1="137.16" y1="73.66" x2="147.32" y2="73.66" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="PCB1" gate="G$1" pin="VIN"/>
+<pinref part="1281" gate="G$1" pin="+"/>
+<wire x1="109.22" y1="17.78" x2="109.22" y2="10.16" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="1281" gate="G$1" pin="-"/>
+<pinref part="59140-040-ND" gate="G$1" pin="1"/>
+<wire x1="109.22" y1="0" x2="109.22" y2="-2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
