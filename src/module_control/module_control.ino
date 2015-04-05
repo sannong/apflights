@@ -62,12 +62,12 @@ void setup(void)
         /* inform the host we are ready, continue to retry until the host 
         responds*/
         flashLed(INDICATOR_LED, 1, 200); 
-        delay(2000u);
+        delay(1000u);
         ret = sendMessage(module_ready, 1, HOST_ADDRESS);
 
         if (ret == OK)
         {
-            ret = recvMessage(1000u);
+            ret = recvMessage(150u);
 
             if (ret == OK)
             {
@@ -162,20 +162,6 @@ void loop(void)
             }
             
             break;         
-        }
-     case STARTUP_ACK:
-        {
-            flashLed(INDICATOR_LED, 1, 200); 
-          
-            /* check for messages */
-            ret = recvMessage(250u);
-
-            if(ret == OK)
-            {
-              checkMessage(); 
-            }
-            
-            break;
         } 
     case RESET:
         {
@@ -343,7 +329,7 @@ static int sendMessage(uint8_t msg, unsigned int size, unsigned int destination)
     Tx16Request tx;
     unsigned int count = 0;
 
-    /* ste the message buffer */
+    /* set the message buffer */
     buf = msg;
 
     do
@@ -453,10 +439,6 @@ static void checkMessage()
         {
             control_state = WAITING; 
         }
-        else if(rx_msg.buf[0] == startup_ack)
-        {
-            control_state = STARTUP_ACK;
-        } 
         else if (rx_msg.buf[0] == module_reset)
         {
             control_state = RESET; 

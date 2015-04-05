@@ -28,15 +28,12 @@ typedef enum button_state_e
 
 typedef struct module_states_t
 {
-    uint32_t        link_state;
-    uint32_t        module_index;
     BUTTON_STATE_E  button_state;
 }MODULE_STATES_T;
 
 
 MODULE_STATES_T module_states[NUM_MODULES]; 
 unsigned int   button_count = 0; 
-unsigned int   link_count = 0; 
 volatile system_state control_state = STARTUP; 
 unsigned int timer_state = TIMER_OFF;
 
@@ -74,72 +71,28 @@ void setup(void)
     Serial.begin(XBEE_SERIAL_RATE);
     xbee.setSerial(Serial);
 
+    /* ensure the module control states are initialized */
+    for(i=0;i<NUM_MODULES;i++)
+    {
+        module_states[i].button_state = BUTTON_CLEAR;
+    }
+
     /* activate the board LED to indicate setup is complete */
     digitalWrite(BOARD_LED, HIGH);
     
     /* activate the reset button LED to indicate system is ready */
     digitalWrite(BLUE_LED, HIGH);
 
+    /* turn on all the LEDs to verify operation */
     digitalWrite(WHITE_LED_L, HIGH);
     digitalWrite(WHITE_LED_R, HIGH);
     digitalWrite(WHITE_LED_C, HIGH);
-    
-    delay(500);
-
-  /*  digitalWrite(WHITE_LED_L, LOW);
-    digitalWrite(WHITE_LED_R, LOW);
-    digitalWrite(WHITE_LED_C, LOW); */
-
-    delay(500);
-
     digitalWrite(RED_LED_L, HIGH);
     digitalWrite(RED_LED_R, HIGH);
     digitalWrite(RED_LED_C, HIGH);
 
-    delay(500);
+    delay(1000);
 
-   /* digitalWrite(RED_LED_L, LOW);
-    digitalWrite(RED_LED_R, LOW);
-    digitalWrite(RED_LED_C, LOW); */
-
-    delay(500);
-
-    /* Establish the link with each module. Each module will send a "ready"
-       command, verify an ACK from the host, then wait on a "clear" message from
-       the host before entering the normal state/ */
-    do
-    {
-        do
-        {
-            /* check for ready message from module */
-            ret = recvMessage(0);
-            
-            if(control_state == RESET)
-            {
-              controledReset();
-            }
-        }while (ret != OK);
-        
-        if (rx_msg.size != INVALID_INDEX)
-        {
-            /* check for ready message */
-            if (rx_msg.buf[0] == module_ready)
-            {
-                /* check this module isn't already connected */
-                if (module_states[rx_msg.size].link_state != LINK_CONNECTED) 
-                {
-                    /* set the module state as connected */
-                    module_states[rx_msg.size].link_state = LINK_CONNECTED; 
-                    module_states[rx_msg.size].button_state = BUTTON_CLEAR; 
-                    link_count++;
-                    sendMessage(startup_ack, 1, rx_msg.source);
-                }
-            }
-        }
-    }while (link_count != NUM_MODULES); 
-    
-    delay(500);
-    
     /* cycle through all LEDs to indicate ready and because it looks cool */
     for (i = 0; i < NUM_MODULES;i++)
     {
@@ -159,15 +112,7 @@ void setup(void)
         setLedState();
         delay(500); 
     }
-    
-    digitalWrite(RED_LED_L, HIGH);
-    digitalWrite(RED_LED_R, HIGH);
-    digitalWrite(RED_LED_C, HIGH);
-    digitalWrite(WHITE_LED_L, HIGH);
-    digitalWrite(WHITE_LED_R, HIGH);
-    digitalWrite(WHITE_LED_C, HIGH);
-    delay(500);
-    
+
     /* send all clear to place system into normal state */
     sendAllClear();
 
@@ -208,10 +153,6 @@ void loop(void)
     case CLEAR:
         {
             /* clear LEDs and send clear to modules */
-            sendAllClear();
-            delay(500);
-            sendAllClear();
-            delay(500);
             sendAllClear();
             
             if(control_state != RESET)
@@ -273,9 +214,7 @@ void loop(void)
         }
     case RESET:
         {
-
             controledReset();
-
         }
     default:
         {
@@ -382,7 +321,6 @@ static int sendMessage(uint8_t msg, unsigned int size, unsigned int destination)
 
     do
     {
-
         /* set the TX request */
         tx = Tx16Request(destination, &buf, size);
         
@@ -567,13 +505,26 @@ static void sendAllClear()
     }
     
     button_count=0;
+
+    setLedState();
     
     /* send clear to all modules */
+    /*sendMessage(module_clear, 1, BRODCAST_ADDRESS);
+    delay(250);
+    sendMessage(module_clear, 1, BRODCAST_ADDRESS);
+    delay(250);
+    sendMessage(module_clear, 1, BRODCAST_ADDRESS);*/
     sendMessage(module_clear, 1, LEFT_ADDRESS);
     sendMessage(module_clear, 1, RIGHT_ADDRESS);
     sendMessage(module_clear, 1, CENTER_ADDRESS);
-    
-    setLedState(); 
+    delay(250);
+    sendMessage(module_clear, 1, LEFT_ADDRESS);
+    sendMessage(module_clear, 1, RIGHT_ADDRESS);
+    sendMessage(module_clear, 1, CENTER_ADDRESS);
+    delay(250);
+    sendMessage(module_clear, 1, LEFT_ADDRESS);
+    sendMessage(module_clear, 1, RIGHT_ADDRESS);
+    sendMessage(module_clear, 1, CENTER_ADDRESS);
     
     return;
 }
