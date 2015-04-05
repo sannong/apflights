@@ -43,6 +43,14 @@ The module Arduino's are programmed with the module source code, and the host is
 
 Note: The Arduino source files end in .ino not .c. They are C files, but the Arduino IDE likes them named .ino. They are just normal C files though and can be edited as such.
 
+Adruino Libraries
+===============
+
+The following Arduino Libraries are required:
+
+- xbee-arduino: https://github.com/andrewrapp/xbee-arduino
+- FlexiTimer2: https://github.com/wimleers/flexitimer2
+
 Xbee Programming Notes
 ===============
 
@@ -58,9 +66,12 @@ define RIGHT_ADDRESS           0x3
 
 define CENTER_ADDRESS          0x4
 
-define BRODCAST_ADDRESS        0xFFFF
+- The address should be set in the "MY (Source Address)" field
+- If the address and BAUD defined in the header is not used communication will fail. Also, although possible, I do not recommend increasing the Xbee BAUD rate above 9600. Higher rates tax the Arduino and can lead to unreliable communication between the host and modules. 
+- The devices operate in a controller/end device configuration. The host module's Xbee module must be programmed as the controller, and the module's Xbee modules must be programmed as end devices. These flags are selectable in the XCTU configuration.
+- Finally the PAN value must be set to the same value for all Xbee modules. This value controls what Xbee devices can talk to other Xbee devices. Only devices with the same PAN can communicate. This also provides a method for running multiple systems at once by giving each system a different PAN value.
 
-If the address and BAUD defined in the header is not used communication will fail. Also, although possible, I do not recommend increasing the Xbee BAUD rate above 9600. Higher rates tax the Arduino and can lead to unreliable communication between the host and modules. An example programming file is provided in the repository.
+An example programming file is provided in the repository under src/XCTU. This file may be loaded by XCTU to provide a base configuration (the address of each module and the controller/end device flags must still be set correctly for each device).
 
 Construction Notes
 ===============
