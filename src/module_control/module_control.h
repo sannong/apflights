@@ -12,7 +12,6 @@
 #define MODULE_CONTROL_H_
 
 #define BUTTON_PRESS_TIMEOUT    (25*ONE_SEC_MS)
-#define BUTTON_SEND_ATTEMPTS    20u
 
 /* Pin defines */
 #define WHITE_BUTTON    2u
@@ -26,10 +25,11 @@
 enum system_state
 {
     STARTUP,
-    STARTUP_ACK,
     NORMAL,
     W_BUTTON_PRESSED,
     R_BUTTON_PRESSED,
+    W_BUTTON_SEND,
+    R_BUTTON_SEND,
     RESET,
     WAITING,
     CLEAR};

@@ -104,11 +104,7 @@ void loop(void)
             break;
         }
     case WAITING:
-        {
-           /* start the timer */
-            FlexiTimer2::set(BUTTON_PRESS_TIMEOUT, watchdog_func); 
-            FlexiTimer2::start();
-
+        {    
             /* check for clear message */
             do
             {
@@ -126,43 +122,59 @@ void loop(void)
           /* set the LEDs to indicate button press */
           ledStateButton();
           
-            if (control_state == W_BUTTON_PRESSED)
-            {
-                /* send the control message to the host */
-                ret = sendMessage(white_button, 1, HOST_ADDRESS);
-
-                if (ret == OK)
-                {
-                    ret = recvMessage(150u);
-
-                    if (ret == OK)
-                    {
-                        checkMessage();
-                    }         
-                }
-            }
-            else if (control_state == R_BUTTON_PRESSED)
-            {
-                /* send the control message to the host */
-                ret = sendMessage(red_button, 1, HOST_ADDRESS);
-
-                if (ret == OK)
-                {
-                    ret = recvMessage(150u);
-
-                    if (ret == OK)
-                    {
-                        checkMessage();
-                    }
-                }
-            }
-            else
-            {
-              control_state = RESET;
-            }
+          /* start the timer */
+          FlexiTimer2::set(BUTTON_PRESS_TIMEOUT, watchdog_func); 
+          FlexiTimer2::start();
+          
+        if (control_state == W_BUTTON_PRESSED)
+        {
+            control_state = W_BUTTON_SEND;
+        }
+        else if (control_state == R_BUTTON_PRESSED)
+        {
+            control_state = R_BUTTON_SEND;
+        }
+        else
+        {
+          control_state = RESET;
+        }
             
-            break;         
-        } 
+          break;         
+        }
+    case W_BUTTON_SEND:
+    {
+        /* send the control message to the host */
+          ret = sendMessage(white_button, 1, HOST_ADDRESS);
+
+          if (ret == OK)
+          {
+              ret = recvMessage(150u);
+
+              if (ret == OK)
+              {
+                  checkMessage();
+              }         
+          }
+
+           break; 
+    }
+    case R_BUTTON_SEND:
+    {
+        /* send the control message to the host */
+        ret = sendMessage(red_button, 1, HOST_ADDRESS);
+        
+        if (ret == OK)
+        {
+            ret = recvMessage(150u);
+        
+            if (ret == OK)
+            {
+                checkMessage();
+            }
+        }
+        
+         break; 
+    }
     case RESET:
         {
             softReset();
