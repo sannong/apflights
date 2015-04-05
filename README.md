@@ -48,8 +48,8 @@ Adruino Libraries
 
 The following Arduino Libraries are required:
 
-xbee-arduino: https://github.com/andrewrapp/xbee-arduino
-FlexiTimer2: https://github.com/wimleers/flexitimer2
+- xbee-arduino: https://github.com/andrewrapp/xbee-arduino
+- FlexiTimer2: https://github.com/wimleers/flexitimer2
 
 Xbee Programming Notes
 ===============
